@@ -64,7 +64,6 @@ export async function appRoutes(app: FastifyInstance) {
     console.log(day);
     return {
       possibleHabits,
-      day,
     };
   });
 }
