@@ -36,10 +36,9 @@ export async function appRoutes(app: FastifyInstance) {
 
     const { date } = getDayParams.parse(request.query);
     //o day retorna o dia da semana, se quiser o dia atual passado precisa usar o "date"
-    const parsedDate = dayjs(date).add(3, "h");
-    const week_day = dayjs(parsedDate).get("day");
+    const parsedDate = dayjs(date).startOf("day");
+    const week_day = parsedDate.get("day");
 
-    console.log(date, week_day);
     const possibleHabits = await prisma.habit.findMany({
       where: {
         createdAt: {
@@ -53,17 +52,29 @@ export async function appRoutes(app: FastifyInstance) {
       },
     });
 
+    //console.log(date);
+
+    const newDate = parsedDate.toDate();
     const day = await prisma.day.findUnique({
       where: {
-        date: parsedDate.toDate(),
+        date: newDate,
       },
-      select: {
+      include: {
         dayHabits: true,
       },
     });
-    console.log(day);
+
+    //console.log(day);
+
+    const completedHabits =
+      day?.dayHabits.map((dayHabit) => {
+        return dayHabit.habitId;
+      }) ?? [];
+    //console.log(completedHabits);
+
     return {
       possibleHabits,
+      completedHabits,
     };
   });
 }

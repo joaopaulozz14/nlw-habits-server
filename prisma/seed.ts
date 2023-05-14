@@ -76,7 +76,7 @@ async function run() {
     prisma.day.create({
       data: {
         /** Monday */
-        date: new Date("2023-01-02T03:00:00.000z"),
+        date: firstHabitCreationDate,
         dayHabits: {
           create: [
             {
@@ -94,7 +94,7 @@ async function run() {
     prisma.day.create({
       data: {
         /** Monday */
-        date: new Date("2023-01-10T03:00:00.000z"),
+        date: thirdHabitCreationDate,
         dayHabits: {
           create: [
             {
@@ -111,7 +111,7 @@ async function run() {
     prisma.day.create({
       data: {
         /** Monday */
-        date: new Date("2023-01-06T03:00:00.000z"),
+        date: secondHabitCreationDate,
         dayHabits: {
           create: [
             {
@@ -124,46 +124,16 @@ async function run() {
 
     /**
      * Habits (Complete/Available): 2/2
-     */
-    prisma.day.create({
-      data: {
-        /** Wednesday */
-        date: new Date("2023-01-04T03:00:00.000z"),
-        dayHabits: {
-          create: [{ habitId: firstHabitId }, { habitId: secondHabitId }],
-        },
-      },
-    }),
 
     /**
      * Habits (Complete/Available): 2/2
      */
-    prisma.day.create({
-      data: {
-        /** Wednesday */
-        date: new Date("2023-01-14T03:00:00.000z"),
-        dayHabits: {
-          create: [{ habitId: firstHabitId }, { habitId: secondHabitId }],
-        },
-      },
-    }),
+ 
 
     /**
      * Habits (Complete/Available): 2/2
      */
-    prisma.day.create({
-      data: {
-        /** Wednesday */
-        date: new Date("2023-01-18T03:00:00.000z"),
-        dayHabits: {
-          create: [
-            { habitId: firstHabitId },
-            { habitId: secondHabitId },
-            { habitId: thirdHabitId },
-          ],
-        },
-      },
-    }),
+    
   ]);
 }
 
